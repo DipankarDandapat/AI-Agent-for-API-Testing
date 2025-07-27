@@ -139,7 +139,7 @@ Download JSON test suite for integration with your CI/CD pipeline
 
 ## 🏗️ **Architecture**
 
-![Architecture](src\\static\\mindmap.png) 
+![Architecture](src/static/mindmap.png) 
 
 ### 🔧 **Tech Stack**
 
