@@ -44,13 +44,11 @@ https://github.com/user-attachments/assets/c545f08c-4af3-4788-946b-3a1eed0b2594
 
 ### 🖼️ **Screenshots**
 
- ![Sample Locust HTML Report Screenshot](src/static/Main Interface.png)  
-
 
 
 |                   Main Interface                   |                 Execution Results                  |
 |:--------------------------------------------------:|:--------------------------------------------------:|
-|![Main Interface](src/static/Main Interface.png)    | [Results](src/static/Execution Results.png) |
+|![Main Interface](src/static/Main%20Interface.png)    | ![Results](src/static/Execution%20Results.png) |
 
 
 
