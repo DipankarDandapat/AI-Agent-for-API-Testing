@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Agent for API Testing</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1><i class="fas fa-robot"></i> AI Agent for API Testing</h1>
+        <p><i class="fas fa-magic"></i> Input your API information and let AI generate comprehensive test cases</p>
+
+        <div class="card">
+            <h2><i class="fas fa-sliders-h"></i> API Configuration</h2>
+            <p>Configure your API endpoint and parameters</p>
+
+            <div class="form-row">
+                <div class="form-group method-group">
+                    <label for="method"><i class="fas fa-code-branch"></i> Method</label>
+                    <select id="method">
+                        <option value="GET">GET</option>
+                        <option value="POST">POST</option>
+                        <option value="PUT">PUT</option>
+                        <option value="PATCH">PATCH</option>
+                        <option value="DELETE">DELETE</option>
+                    </select>
+                </div>
+                <div class="form-group url-group">
+                    <label for="url"><i class="fas fa-link"></i> URL</label>
+                    <input type="text" id="url" placeholder="https://api.example.com/endpoint">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="headers"><i class="fas fa-heading"></i> Headers (JSON)</label>
+                <textarea id="headers" placeholder='{"content-type": "application/json"}' rows="4" spellcheck="false"></textarea>
+                <div id="headersError" style="color: red; display: none;">Invalid JSON</div>
+
+            </div>
+
+            <div id="payload-section" class="hidden">
+                <div class="form-group">
+                    <label for="payload"><i class="fas fa-database"></i> Payload (JSON)</label>
+                    <textarea id="payload" placeholder='{"key": "value"}' rows="4" spellcheck="false"></textarea>
+                    <div id="payloadError" style="color: red; display: none;">Invalid JSON</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="queryParams"><i class="fas fa-search"></i> Query Parameters (JSON)</label>
+                <textarea id="queryParams" placeholder="{}" rows="2" spellcheck="false"></textarea>
+                <div id="queryParamsError" style="color: red; display: none;">Invalid JSON </div>
+            </div>
+
+            <div id="file-upload-section" class="hidden">
+                <div class="form-group">
+                    <label for="file"><i class="fas fa-file-upload"></i> File Upload (Optional)</label>
+                    <input type="file" id="file" accept=".png,.jpg,.jpeg,.pdf,.pptx,.mp3,.txt,.csv,.json,.xml">
+                    <span id="file-name"></span>
+                </div>
+                <div class="form-group">
+                    <label for="fileVariableName"><i class="fas fa-tag"></i> File Variable Name</label>
+                    <input type="text" id="fileVariableName" value="file">
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button id="test-api-btn"><i class="fas fa-bolt"></i> Test API</button>
+                <button id="generate-tests-btn" class="primary"><i class="fas fa-vial"></i> Generate Tests with AI</button>
+                <button id="generate-tests-simple-btn"><i class="fas fa-vial"></i> Generate Tests without AI</button>
+            </div>
+        </div>
+
+        <div id="error-display" class="card error-card hidden">
+            <p id="error-message"><i class="fas fa-exclamation-circle"></i> <span></span></p>
+        </div>
+
+        <div id="api-response-section" class="card hidden">
+            <h2><i class="fas fa-server"></i> API Response</h2>
+            <p><i class="fas fa-info-circle"></i> Status: <span id="response-status"></span></p>
+            <div id="curl-command-section" class="hidden">
+                <label><i class="fas fa-terminal"></i> cURL Command:</label>
+                <pre id="curl-command"></pre>
+                <button id="copy-curl-btn"><i class="far fa-copy"></i> Copy</button>
+            </div>
+            <label><i class="fas fa-code"></i> Response Content:</label>
+            <pre id="response-content"></pre>
+        </div>
+
+         <div id="generated-test-cases-section" class="card hidden">
+        <div class="test-cases-header">
+            <h2><i class="fas fa-tasks"></i> Generated Test Cases</h2>
+            <button id="download-json-btn" class="modern-button"><i class="fas fa-file-download"></i> Download JSON</button>
+        </div>
+
+        <div class="tabs">
+            <button class="tab-button active" data-tab="positive">
+                <i class="fas fa-check-circle"></i> Positive <span class="test-count">0</span>
+            </button>
+            <button class="tab-button" data-tab="negative">
+                <i class="fas fa-times-circle"></i> Negative <span class="test-count">0</span>
+            </button>
+            <button class="tab-button" data-tab="boundary">
+                <i class="fas fa-border-all"></i> Boundary <span class="test-count">0</span>
+            </button>
+            <button class="tab-button" data-tab="semantic">
+                <i class="fas fa-project-diagram"></i> Semantic <span class="test-count">0</span>
+            </button>
+            <button class="tab-button" data-tab="security">
+                <i class="fas fa-shield-alt"></i> Security <span class="test-count">0</span>
+            </button>
+        </div>
+
+        <div id="test-cases-content">
+            <div id="positive-tests" class="tab-content active">
+                <div class="empty-state">
+                    <i class="fas fa-vial"></i>
+                    <p>No positive test cases generated yet</p>
+                </div>
+            </div>
+            <div id="negative-tests" class="tab-content">
+                <div class="empty-state">
+                    <i class="fas fa-vial"></i>
+                    <p>No negative test cases generated yet</p>
+                </div>
+            </div>
+            <div id="boundary-tests" class="tab-content">
+                <div class="empty-state">
+                    <i class="fas fa-vial"></i>
+                    <p>No boundary test cases generated yet</p>
+                </div>
+            </div>
+            <div id="semantic-tests" class="tab-content">
+                <div class="empty-state">
+                    <i class="fas fa-vial"></i>
+                    <p>No semantic test cases generated yet</p>
+                </div>
+            </div>
+            <div id="security-tests" class="tab-content">
+                <div class="empty-state">
+                    <i class="fas fa-vial"></i>
+                    <p>No security test cases generated yet</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
