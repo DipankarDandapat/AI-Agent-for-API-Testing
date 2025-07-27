@@ -89,8 +89,8 @@ https://github.com/user-attachments/assets/c545f08c-4af3-4788-946b-3a1eed0b2594
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/ai-agent-api-testing.git
-cd ai-agent-api-testing
+git clone https://github.com/DipankarDandapat/AI-Agent-for-API-Testing.git
+cd AI-Agent-for-API-Testing.git
 
 # Create virtual environment
 python -m venv venv
@@ -159,7 +159,7 @@ Download JSON test suite for integration with your CI/CD pipeline
 ## 📁 **Project Structure**
 
 ```
-AI Agent for API Testing/
+AI-Agent-for-API-Testing/
 ├── src/
 │   ├── static/
 │   │   ├── index.html              # Main web interface
