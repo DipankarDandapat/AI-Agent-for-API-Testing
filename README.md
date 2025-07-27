@@ -30,25 +30,27 @@ Successfully built and deployed a comprehensive AI Agent for API Testing that al
 🔄 **Smart Fallback** - Rule-based generator ensures reliability when AI services are unavailable  
 
 ---
-
 ## 🎬 **Demo**
 
  **📹 Watch the Full Demo Video**
 
- [🎥 **Click here to see AI Agent for API Testing in action**](src/static/getAPI.mp4)
+
+
+https://github.com/user-attachments/assets/c545f08c-4af3-4788-946b-3a1eed0b2594
+
+
  
  *See how easy it is to generate comprehensive test suites in under 2 minutes!*
 
 ### 🖼️ **Screenshots**
 
-<details>
-<summary>📸 Click to view screenshots</summary>
+
 
 |                   Main Interface                   |                 Execution Results                  |
 |:--------------------------------------------------:|:--------------------------------------------------:|
-| ![Main Interface](src/static/Main Interface.png)  | ![Results](src/static/Execution Results.png) |
+| [Main Interface](src/static/Main Interface.png)  | [Results](src/static/Execution Results.png) |
 
-</details>
+
 
 ---
 
